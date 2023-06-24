@@ -1,30 +1,22 @@
 import React from "react";
+import './appStyles.css';
 
-class SearchBar extends React.Component {
-  state = {
-    msg: "",
-  };
-  onFormSubmit = (e) => {
-    e.preventDefault();
-    this.props.onSubmit(this.state.msg);
-  };
-
-  render() {
-    return (
-      <div className="ui segment">
-        <form onSubmit={this.onFormSubmit} className="ui form">
+function SearchBar({onChange,msg,loading}){
+  return (
+    <div className="ui segment">
+        <form className="ui form">
           <label className="ui label massive">Search Images </label>
           <input
             className="ui input "
             type="text"
             placeholder="Search For Images"
-            value={this.state.msg}
-            onChange={(e) => this.setState({ msg: e.target.value })}
+            value={msg}
+            onChange={(e)=>onChange(e.target.value)}
           />
         </form>
+        {loading ? <div className="loader"></div> : null}
       </div>
-    );
-  }
+  )
 }
 
 export default SearchBar;
